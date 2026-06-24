@@ -1,0 +1,43 @@
+# ============================================
+# CONTENT LAB — Posting Schedule
+# Edit topics here, scheduler reads this file
+# ============================================
+
+posts:
+  # --- YouTube Long-form (Mon / Wed / Fri at 9am) ---
+  - niche: finance
+    topic: "5 ways to make passive income with AI in 2026"
+    format: long
+    platforms: youtube
+    days: [monday]
+    time: "09:00"
+
+  - niche: ai
+    topic: "These 3 free AI tools will save you 10 hours per week"
+    format: long
+    platforms: youtube
+    days: [wednesday]
+    time: "09:00"
+
+  - niche: business
+    topic: "How to start a faceless YouTube channel and make $3000 per month"
+    format: long
+    platforms: youtube
+    days: [friday]
+    time: "09:00"
+
+  # --- TikTok + Facebook Shorts (Daily 6pm) ---
+  - niche: finance
+    topic: "One money tip that changed everything"
+    format: short
+    platforms: tiktok,facebook
+    days: [monday, tuesday, wednesday, thursday, friday]
+    time: "18:00"
+
+  # --- Weekend bonus ---
+  - niche: ai
+    topic: "AI tools you didn't know existed in 2026"
+    format: short
+    platforms: tiktok,facebook,youtube
+    days: [saturday]
+    time: "11:00"
