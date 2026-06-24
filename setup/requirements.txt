@@ -1,42 +1,37 @@
 # ============================================
 # Content Lab — Python Requirements
-# Compatible with Python 3.12 (Ubuntu 24.04)
+# Pin-free: works on Python 3.12, 3.13, 3.14
 # ============================================
 
-# Core
-requests==2.32.3
-python-dotenv==1.0.1
-click==8.1.7
-rich==13.9.4
-pyyaml==6.0.2
-schedule==1.2.2
+# --- Core ---
+requests
+python-dotenv
+click
+rich
+pyyaml
+schedule
 
-# AI / Script generation
-openai==1.51.0
-ollama==0.3.3
-anthropic==0.34.2
+# --- AI / Script generation ---
+openai
+ollama
+anthropic
 
-# Text-to-Speech (Python 3.12 compatible alternatives to Coqui)
-# Primary: pyttsx3 (offline, no model download needed)
-pyttsx3==2.90
-# Secondary: edge-tts (Microsoft Azure voices, FREE, online)
-edge-tts==6.1.12
-# Optional paid: elevenlabs
-elevenlabs==1.9.0
+# --- Text-to-Speech (no Coqui — incompatible with 3.12+) ---
+edge-tts          # FREE Microsoft neural voices, online, great quality
+pyttsx3           # fully offline fallback
+elevenlabs        # paid premium (optional)
 
-# Video processing (Python 3.12 compatible versions)
-moviepy==2.1.1
-Pillow==10.4.0
-numpy==2.1.3
-opencv-python==4.10.0.84
+# --- Video / Image ---
+# NOTE: Pillow needs system libs — run setup/install.sh first
+#       which installs: libjpeg-dev libpng-dev libtiff-dev
+Pillow
+moviepy
+pydub
 
-# Audio
-pydub==0.25.1
+# --- YouTube API ---
+google-auth
+google-auth-oauthlib
+google-api-python-client
 
-# YouTube API
-google-auth==2.35.0
-google-auth-oauthlib==1.2.1
-google-api-python-client==2.151.0
-
-# Scheduler
-apscheduler==3.10.4
+# --- Scheduler ---
+apscheduler
