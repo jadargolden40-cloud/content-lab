@@ -10,8 +10,13 @@ Flags:
   --platforms youtube,tiktok,facebook
 """
 
-import click
+import sys
 import os
+
+# Fix import path — add project root so 'pipeline' package is always found
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import click
 from dotenv import load_dotenv
 from rich.console import Console
 from rich.panel import Panel
