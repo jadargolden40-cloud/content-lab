@@ -35,7 +35,20 @@ def upload_youtube(video_path: str, title: str, niche: str):
         body = {
             'snippet': {
                 'title': title,
-                'description': f'{title}\n\n#finance #ai #money #2026\n\nFor educational purposes only.',
+                'description': (
+                    f'{title}\n\n'
+                    f'🚀 Own your entire digital selling stack — no platform fees, no lock-in.\n\n'
+                    f'👉 Try Cadenza FREE (live demo): https://cadenza.tools4noobs.shop\n'
+                    f'📋 Founding price $99 one-time: https://cadenza.tools4noobs.shop/#waitlist\n\n'
+                    f'💰 Start investing FREE on Coinbase → https://coinbase.com/join/RSH8V53?src=ios-link\n'
+                    f'(Get $10 in free Bitcoin when you buy $100+)\n\n'
+                    f'#cadenza #selfhosted #digitalseller #passiveincome #gumroad #indiehacker #makemoneyonline #digitalproducts'
+                ) if niche == 'cadenza' else (
+                    f'{title}\n\n'
+                    f'💰 Start investing in crypto FREE on Coinbase → https://coinbase.com/join/RSH8V53?src=ios-link\n'
+                    f'(You get $10 in free Bitcoin when you buy $100+)\n\n'
+                    f'#finance #ai #money #2026\n\nFor educational purposes only.'
+                ),
                 'tags': tags,
                 'categoryId': '27'  # Education
             },
@@ -44,10 +57,13 @@ def upload_youtube(video_path: str, title: str, niche: str):
         media = MediaFileUpload(video_path, chunksize=-1, resumable=True)
         req = yt.videos().insert(part='snippet,status', body=body, media_body=media)
         resp = req.execute()
-        print(f"✅ YouTube upload: https://youtube.com/watch?v={resp.get('id')}")
+        vid_id = resp.get('id')
+        print(f"✅ YouTube upload: https://youtube.com/watch?v={vid_id}")
+        return vid_id
 
     except Exception as e:
         print(f"❌ YouTube upload failed: {e}")
+        return None
 
 
 def upload_facebook(video_path: str, title: str):
@@ -123,14 +139,15 @@ def upload_tiktok(video_path: str, title: str):
 
 
 def upload_video(video_path: str, title: str, niche: str, platform: str):
-    """Route upload to the correct platform."""
+    """Route upload to the correct platform. Returns video ID for YouTube."""
     p = platform.lower().strip()
     print(f"  📤 Uploading to {p.upper()}...")
     if p == 'youtube':
-        upload_youtube(video_path, title, niche)
+        return upload_youtube(video_path, title, niche)
     elif p == 'facebook':
         upload_facebook(video_path, title)
     elif p == 'tiktok':
         upload_tiktok(video_path, title)
     else:
         print(f"❌ Unknown platform: {platform}")
+    return None

@@ -74,7 +74,7 @@ def generate_script(niche: str, topic: str, fmt: str = 'long') -> str:
             f"{os.getenv('OLLAMA_URL', 'http://localhost:11434')}/api/generate",
             json={"model": os.getenv('OLLAMA_MODEL', 'mistral'),
                   "prompt": prompt, "stream": False},
-            timeout=120
+            timeout=600
         )
         if resp.status_code == 200:
             script_text = resp.json().get('response', '')

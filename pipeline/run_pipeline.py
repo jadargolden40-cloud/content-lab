@@ -81,12 +81,25 @@ def main(niche, topic, fmt, upload, platforms):
         progress.update(task4, description=f"[green]✅ Video ready: {video_path}")
         progress.stop_task(task4)
 
+        # Step 4b: Generate Thumbnail
+        from pipeline.steps.thumbnail_gen import generate_thumbnail
+        thumbnail_path = generate_thumbnail(topic, niche)
+        progress.update(task4, description=f"[green]✅ Video + thumbnail ready")
+        progress.stop_task(task4)
+
         # Step 5: Upload (optional)
+        video_id = None
         if upload:
             task5 = progress.add_task("[cyan]Step 5/5 — Uploading to platforms...", total=None)
             from pipeline.steps.uploader import upload_video
             for platform in platforms.split(','):
-                upload_video(video_path, topic, niche, platform.strip())
+                vid = upload_video(video_path, topic, niche, platform.strip())
+                if vid and platform.strip() == 'youtube':
+                    video_id = vid
+            # Upload thumbnail to YouTube
+            if video_id and thumbnail_path:
+                from pipeline.steps.thumbnail_gen import upload_thumbnail
+                upload_thumbnail(video_id, thumbnail_path)
             progress.update(task5, description="[green]✅ Uploaded!")
             progress.stop_task(task5)
         else:
